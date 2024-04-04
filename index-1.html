@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Static Web Apps Database Connections</h1>
+<blockquote>
+    Open the console in the browser developer tools to see the API responses.
+</blockquote>
+<div>
+    <button id="list" onclick="list()">List</button>
+    <button id="get" onclick="get()">Get</button>
+    <button id="update" onclick="update()">Update</button>
+    <button id="create" onclick="create()">Create</button>
+    <button id="delete" onclick="del()">Delete</button>
+</div>
+<script>
+    async function list() {
+  const endpoint = '/data-api/rest/Person';
+  const response = await fetch(endpoint);
+  const data = await response.json();
+  console.table(data.value);
+}
+</script>
+</body>
+</html>
