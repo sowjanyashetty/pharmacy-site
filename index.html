@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pharmacy Management System</title>
+    <title style="text-align: center;">Pharmacy Management System</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
+            background-color: #eaf2f8; /* Light blue */
+            color: #333; /* Dark gray */
         }
 
         h1, h2 {
-            color: #333;
+            text-align: center;
         }
 
         form {
             margin-bottom: 20px;
+            display: none; /* Hide forms initially */
         }
 
         label {
@@ -34,8 +37,24 @@
             box-sizing: border-box;
         }
 
+        input[type="button"] {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px; /* Rounded corners */
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        input[type="button"]:hover {
+            background-color: #7445a0;/* Darker green */
+        }
+
+        /* Change color of submit buttons */
         input[type="submit"] {
-            background-color: #4CAF50;
+            background-color: #4CAF50; /* Green */
             color: white;
             padding: 10px 20px;
             border: none;
@@ -44,15 +63,65 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #45a049;
+            background-color: #7445a0;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        /* Style for the patient list */
+        #patientList {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #patientList th, #patientList td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #patientList th {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+
+        #patientList tr:nth-child(even) {
+            background-color: #f2f2f2; /* Light gray */
+        }
+
+        #patientList tr:hover {
+            background-color: #ddd; /* Darker gray */
         }
     </style>
 </head>
 <body>
     <h1>Pharmacy Management System</h1>
 
+    <!-- Button container for actions -->
+    <div class="btn-container">
+        <input type="button" value="Add Patient" onclick="showForm('addForm')">
+        <input type="button" value="Update Patient" onclick="showForm('updateForm')">
+        <input type="button" value="Delete Patient" onclick="showForm('deleteForm')">
+        <input type="button" value="View All Patients" onclick="viewAllPatients()">
+        <input type="button" value="View Patient by ID" onclick="showForm('viewPatientByIDForm')">
+    </div>
+    <!-- Patient list table -->
+    <table id="patientList">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody id="patientListBody">
+            <!-- Patient records will be inserted here dynamically -->
+        </tbody>
+    </table>
     <!-- Form for adding new pharmacy record -->
-    <h2>Add Pharmacy Record</h2>
     <form id="addForm">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br><br>
@@ -67,7 +136,6 @@
     </form>
 
     <!-- Form for updating existing pharmacy record -->
-    <h2>Update Pharmacy Record</h2>
     <form id="updateForm">
         <label for="record_id">Record ID:</label>
         <input type="text" id="record_id" name="record_id" required><br><br>
@@ -85,7 +153,6 @@
     </form>
 
     <!-- Form for deleting existing pharmacy record -->
-    <h2>Delete Pharmacy Record</h2>
     <form id="deleteForm">
         <label for="delete_record_id">Record ID:</label>
         <input type="text" id="delete_record_id" name="delete_record_id" required><br><br>
@@ -93,21 +160,74 @@
         <input type="button" value="Delete Record" onclick="deleteRecord()">
     </form>
 
-    <script>
-        function addRecord() {
-            // You can implement the logic to add a record using JavaScript
-            alert("Record added successfully!");
-        }
+    <!-- Form for viewing all patients -->
+    
+        <form id="viewPatientByIDForm">
+            <label for="patient_id">Patient ID:</label>
+            <input type="text" id="patient_id" name="patient_id" required><br><br>
+            
+            <input type="button" value="View Patient" onclick="viewPatientByID()">
+        </form>
+    
+        <script>
+            // Function to show the corresponding form based on the button clicked
+            function showForm(formId) {
+                // Hide all forms first
+                document.querySelectorAll('form').forEach(form => {
+                    form.style.display = 'none';
+                });
+    
+                // Show the selected form
+                document.getElementById(formId).style.display = 'block';
+            }
+    
+            function addRecord() {
+                // You can implement the logic to add a record using JavaScript
+                alert("Record added successfully!");
+            }
+    
+            function updateRecord() {
+                // You can implement the logic to update a record using JavaScript
+                alert("Record updated successfully!");
+            }
+    
+            function deleteRecord() {
+                // You can implement the logic to delete a record using JavaScript
+                alert("Record deleted successfully!");
+            }
+    
+            function viewPatientByID() {
+                // You can implement the logic to view a patient by ID using JavaScript
+                alert("Viewing patient by ID...");
+            }
+            async function viewAllPatients() {
+    try {
+        const endpoint = '/data-api/rest/Person'; // Assuming this endpoint fetches patient records
+        const response = await fetch(endpoint);
+        const data = await response.json();
 
-        function updateRecord() {
-            // You can implement the logic to update a record using JavaScript
-            alert("Record updated successfully!");
-        }
+        // Get the table body element
+        const tbody = document.getElementById('patientListBody');
 
-        function deleteRecord() {
-            // You can implement the logic to delete a record using JavaScript
-            alert("Record deleted successfully!");
-        }
-    </script>
-</body>
-</html>
+        // Clear existing table rows
+        tbody.innerHTML = '';
+        console.table(data.value);
+        // Iterate through the patient records and create table rows
+        data.value.forEach(data => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${data.Id}</td>
+                <td>${data.Name}</td>
+                <td>${data.Address}</td>
+                
+            `;
+            tbody.appendChild(tr);
+        });
+    } catch (error) {
+        console.error('Error fetching patient records:', error);
+    }
+}
+
+        </script>
+    </body>
+    </html>
