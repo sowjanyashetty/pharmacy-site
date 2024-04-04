@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pharmacy Management System</h1>
+
+    <!-- Form for adding new pharmacy record -->
+    <h2>Add Pharmacy Record</h2>
+    <form id="addForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required><br><br>
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" required><br><br>
+
+        <input type="button" value="Add Record" onclick="addRecord()">
+    </form>
+
+    <!-- Form for updating existing pharmacy record -->
+    <h2>Update Pharmacy Record</h2>
+    <form id="updateForm">
+        <label for="record_id">Record ID:</label>
+        <input type="text" id="record_id" name="record_id" required><br><br>
+        
+        <label for="new_name">New Name:</label>
+        <input type="text" id="new_name" name="new_name"><br><br>
+
+        <label for="new_address">New Address:</label>
+        <input type="text" id="new_address" name="new_address"><br><br>
+
+        <label for="new_phone">New Phone:</label>
+        <input type="text" id="new_phone" name="new_phone"><br><br>
+
+        <input type="button" value="Update Record" onclick="updateRecord()">
+    </form>
+
+    <!-- Form for deleting existing pharmacy record -->
+    <h2>Delete Pharmacy Record</h2>
+    <form id="deleteForm">
+        <label for="delete_record_id">Record ID:</label>
+        <input type="text" id="delete_record_id" name="delete_record_id" required><br><br>
+        
+        <input type="button" value="Delete Record" onclick="deleteRecord()">
+    </form>
+
+    <script>
+        function addRecord() {
+            // You can implement the logic to add a record using JavaScript
+            alert("Record added successfully!");
+        }
+
+        function updateRecord() {
+            // You can implement the logic to update a record using JavaScript
+            alert("Record updated successfully!");
+        }
+
+        function deleteRecord() {
+            // You can implement the logic to delete a record using JavaScript
+            alert("Record deleted successfully!");
+        }
+    </script>
+</body>
+</html>
